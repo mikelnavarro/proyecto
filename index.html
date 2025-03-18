@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Noticias y Resultados Electorales</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    nav a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background-color: #575757;
+    }
+
+    .container {
+      display: flex;
+      margin: 20px;
+    }
+
+    .container .section {
+      flex: 1;
+      margin: 10px;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+      color: #333;
+    }
+
+    .results, .complaints {
+      margin: 20px;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .media-section {
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.image-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.image-gallery img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.audio-player {
+  margin-top: 10px;
+}
+
+audio {
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto;
+  display: block;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.img_mapeada{
+  height: auto;
+  border-radius: 5px;
+  max-width: 200px;
+  width: auto;
+}
+
+.texto-noticia {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.texto-noticia h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.texto-noticia p {
+  margin: 5px 0;
+  color: #555;
+}
+
+
+.botones-enlaces {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.botones-enlaces button {
+  background: rgba(70, 46, 224, 0.982);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.botones-enlaces button a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.botones-enlaces button:hover {
+  background: rgba(9, 31, 159, 0.868);
+  transform: scale(1.05);
+}
+
+.video-seccion {
+  text-align: center;
+  margin: 30px 0;
+}
+
+video {
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.poema {
+  margin-top: 20px;
+  font-style: italic;
+  color: #555;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+.iframe-container {
+  position: relative;
+  width: 80%;
+  height: 450px;
+  margin: 20px auto;
+  overflow: hidden;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+iframe:hover {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+.contenido {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px;
+}
+
+.media {
+  flex: 1;
+}
+
+.media img, 
+.media video {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.formulario {
+  flex: 1;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.formulario h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.formulario label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.formulario input, 
+.formulario textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.formulario button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+
+.formulario button:hover {
+  background-color: #357abd;
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Portal de Noticias y Resultados Electorales</h1>
+</header>
+
+<nav>
+  <a href="#noticias">Noticias</a>
+  <a href="#resultados">Resultados Electorales</a>
+  <a href="#quejas">Quejas y Votos en Revisión</a>
+  <a href="#contacto">Contacto</a>
+  <a href="asociacionespa/index.html">Asociación de Patriotas</a>
+  <a href="Generadorpdf/gen_archivo_pdf.html">PDF</a>
+  <a href="MiraHora.html">Mira la hora</a>
+</nav>
+
+<div class="container">
+  <div class="section" id="noticias-izquierda">
+    <h2>Noticias de la Izquierda</h2>
+      <img src="imagenes/img-cuadro.jpg">
+        </div>
+
+  <div class="section" id="noticias-centro">
+    <h2>Noticias del Centro</h2>
+    <p>Noticia 3...</p>
+  
+      <div class="texto-noticia">
+        <p><strong>Noticia 1:</strong> Explora la sección resaltada en el mapa para más detalles.</p>
+        <p><strong>Noticia 2:</strong> Haz clic en el círculo para conocer más.</p>
+        <p><strong>Noticia 3:</strong> La región poligonal ofrece información crucial.</p>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+
+<div class="results" id="resultados">
+  <h2>Resultados Electorales</h2>
+  <p><strong>Partido A:</strong> 45,000 votos (45%)</p>
+  <p><strong>Partido B:</strong> 30,000 votos (30%)</p>
+  <p><strong>Partido C:</strong> 15,000 votos (15%)</p>
+  <p><strong>Partido D:</strong> 10,000 votos (10%)</p>
+</div>
+
+
+<div class="botones-enlaces">
+  <button><a href="https://www.cruzroja.es">Cruz Roja España</a></button>
+  <button><a href="#enlace2">RTVE</a></button>
+  <button><a href="https://www.gva.com">Generalitat Valenciana</a></button>
+  <button><a href="https://www.ayudaterreta.io">Ayuda Terreta</a></button>
+  <button><a href="https://www.desdevalenciaparavalencia.com">Cocineros Por Valencia</a></button>
+</div>
+<div class="video-seccion">
+
+
+  <iframe width="696" height="522" 
+    src="https://www.youtube.com/embed/sDOondJ6lXY?list=RDKCm8ElMDthc" 
+    title="La Oreja de Van Gogh - Puedes Contar Conmigo (Actuación TVE)" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerpolicy="strict-origin-when-cross-origin" 
+    allowfullscreen>
+  </iframe>
+
+
+
+
+<div class="iframe-container">
+  <iframe 
+    src="https://www.youtube.com/embed?v=6stlCkUDG_s&list=PL4Gr5tOAPttKUXrXjulSCYa-L4xIwDyTi&index=2" 
+    title="Contenido Externo" 
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+</div>
+
+  <div class="poema">
+    <p>
+      En el silencio gélido de la noche,<br>
+      la tierra grita, la muerte se aproxima.<br>
+      Sombras que danzan en un mar de fuego,<br>
+      cenizas de vidas, sueños deshechos.<br>
+      <br>
+      Catástrofe, reina del caos y del miedo,<br>
+      tus pasos borran la luz y la esperanza.<br>
+      Pero en cada lágrima que derrama el cielo,<br>
+      nacen versos que nunca se olvidan.
+    </p>
+  </div>
+</div>
+
+<div class="media-section">
+  <div class="image-gallery">
+    <img src="rojo.jpg">
+    <img src="rojo.jpg">
+    <img src="rojo.jpg">
+    <img src="rojo.jpg">
+    <img src="rojo.jpg">
+
+  </div>
+  <div class="image-gallery">
+    <img src="amarillo.jpg">
+    <img src="amarillo.jpg">
+    <img src="amarillo.jpg">
+    <img src="amarillo.jpg">
+    <img src="amarillo.jpg">
+
+  </div>
+
+  <div class="image-gallery">
+    <img src="amarillo.jpg">
+    <img src="amarillo.jpg">
+    <img src="amarillo.jpg">
+    <img src="amarillo.jpg">
+    <img src="amarillo.jpg">
+
+  </div>
+  <div class="image-gallery">
+    <img src="rojo.jpg">
+    <img src="rojo.jpg">
+    <img src="rojo.jpg">
+    <img src="rojo.jpg">
+    <img src="rojo.jpg">
+
+  </div>
+  <div class="audio-player">
+    <h3>Escucha nuestro último podcast</h3>
+    <audio controls>
+      <source src="/Users/mikel/Music/eurovision/y2mate.is - BLANCA PALOMA EAEA Official Audio -_6Mef__R5dU-128k-1703188723.mp3" type="audio/mpeg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+  </div>
+</div>
+
+<div class="contenido">
+  <div class="media">
+    <video controls>
+      <source src="/Users/mikel/Videos/ANHQV/04x11.mp4">
+      Tu navegador no soporta la reproducción de video.
+    </video>
+  </div>
+
+  <div class="formulario">
+    <h2>Contacto</h2>
+    <form action="#" method="post">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="email">Correo Electrónico:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <p>© 2024 Portal de Noticias y Resultados. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>

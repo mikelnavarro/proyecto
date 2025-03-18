@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<title>Generar PDF</title>
+    <style>
+        /* Estilos b sicos */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Contenedor central */
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* T tulo */
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Etiquetas de los campos */
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        /* Campos de entrada */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Estilo del textarea */
+        textarea {
+            resize: none;
+        }
+
+        /* Bot n para generar el PDF */
+        a {
+            display: block;
+            text-align: center;
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Efecto hover en el bot n */
+        a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Crear Archivos PDF</h1>
+        <!-- Campos del formulario -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" placeholder="Ingresa tu nombre" id="nombre">
+
+        <label for="email">Correo Electronico:</label>
+        <input type="email" placeholder="Ingresa tu correo" id="email">
+	
+	<label for="fechadenacimiento">Fecha de Nacimiento:</label>
+        <input type="date" placeholder="Ingresa tu telefono" id="fechadenacimiento">
+
+
+        <label for="telefono">Telefono:</label>
+        <input type="text" placeholder="Ingresa tu telefono" id="telefono">
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" placeholder="Escribe tu mensaje aqui" rows="4"></textarea>
+
+        <!-- Bot n para crear el PDF -->
+        <a href="javascript:genPDF()">Crear PDF</a>
+    </div>
+
+    <script type="text/javascript" src="jspdf.min.js"></script>
+    <script type="text/javascript">
+function genPDF() {
+    var doc = new jsPDF();
+
+    let nombre = document.getElementById('nombre').value;
+    let email = document.getElementById('email').value;
+    let fechadenacimiento = document.getElementById('fechadenacimiento').value;
+    let telefono = document.getElementById('telefono').value;
+    let mensaje = document.getElementById('mensaje').value;
+
+    doc.setFont("helvetica", "bold");
+    doc.text(20, 20, "Informaci n del Usuario");
+    doc.setFont("helvetica", "normal");
+
+    let y = 40; // Posici n inicial en el eje Y
+
+    // Aplicar salto de l nea en cada campo si es necesario
+    let nombreFormateado = doc.splitTextToSize("Nombre: " + nombre, 170);
+    doc.text(20, y, nombreFormateado);
+    y += nombreFormateado.length * 10; // Ajustar la posici n
+
+    let emailFormateado = doc.splitTextToSize("Correo Electronico: " + email, 170);
+    doc.text(20, y, emailFormateado);
+    y += emailFormateado.length * 10;
+
+    let fechaFormateada = "Fecha de nacimiento: " + fechadenacimiento;
+    doc.text(20, y, fechaFormateada);
+    y += 10;
+
+    let telefonoFormateado = "Telefono: " + telefono;
+    doc.text(20, y, telefonoFormateado);
+    y += 10;
+
+    doc.text(20, y, "Mensaje:");
+    y += 10;
+
+    let mensajeFormateado = doc.splitTextToSize(mensaje, 170);
+    doc.text(20, y, mensajeFormateado);
+
+    doc.save("datos_usuario.pdf");
+}
+
+
+    </script>
+</body>
+</html>
+

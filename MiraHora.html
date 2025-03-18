@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hora y Fecha Completa</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            color: #2d87f0;
+            margin-top: 50px;
+        }
+        #fecha, #hora, #sincronizacion {
+            font-size: 36px;
+            margin: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .emoticonos {
+            font-size: 50px;
+            margin-top: 20px;
+        }
+        .alerta {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff6347;
+            margin-top: 20px;
+        }
+        .sincronizado {
+            font-size: 32px;
+            font-weight: bold;
+            color: #32cd32;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌐 Hora y Fecha Completa</h1>
+    <div id="fecha"></div>
+    <div id="hora"></div>
+    <div id="sincronizacion"></div>
+    <div id="hora-servidor"></div>
+    <div class="emoticonos">⌛️ 📅 🕒</div>
+
+    <script>
+        // Función para obtener y mostrar la fecha
+        function obtenerFecha() {
+            const now = new Date();
+
+            const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+            const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+            const diaSemana = dias[now.getDay()];
+            const dia = now.getDate();
+            const mes = meses[now.getMonth()];
+            const anio = now.getFullYear();
+
+            const fechaFormateada = `${diaSemana} ${dia} de ${mes} del ${anio}`;
+            document.getElementById('fecha').innerText = `📅 ${fechaFormateada}`;
+        }
+
+        // Función para mostrar la hora con segundos y microsegundos
+        function mostrarHora() {
+            const now = new Date();
+            const horas = String(now.getHours()).padStart(2, '0');
+            const minutos = String(now.getMinutes()).padStart(2, '0');
+            const segundos = String(now.getSeconds()).padStart(2, '0');
+            const milisegundos = String(now.getMilliseconds()).padStart(3, '0');
+            const microsegundos = String(now.getMilliseconds() * 1000).padStart(6, '0'); // Aproximación a microsegundos
+
+            const horaFormateada = `${horas}:${minutos}:${segundos}:${milisegundos}:${microsegundos}`;
+            document.getElementById('hora').innerText = `🕒 ${horaFormateada}`;
+        }
+
+        // Función para verificar la sincronización del reloj con un servidor
+        function verificarSincronizacion() {
+            const ahora = new Date().getTime();
+            fetch('http://worldtimeapi.org/api/timezone/Etc/UTC.json')
+                .then(response => response.json())
+                .then(data => {
+                    const horaServidor = new Date(data.utc_datetime).getTime();
+                    const diferencia = Math.abs(ahora - horaServidor); // Diferencia en milisegundos
+
+                    // Mostrar hora del servidor
+                    const horaServidorFormateada = new Date(data.utc_datetime).toLocaleString();
+                    document.getElementById('hora-servidor').innerText = `🖥️ Hora del servidor: ${horaServidorFormateada}`;
+
+                    // Verificar si la diferencia es menor a 5 segundos
+                    if (diferencia < 5000) {
+                        document.getElementById('sincronizacion').innerText = "✔️ ¡Tu equipo tiene el reloj sincronizado!";
+                        document.getElementById('sincronizacion').classList.add("sincronizado");
+                        document.getElementById('sincronizacion').classList.remove("alerta");
+                    } else {
+                        document.getElementById('sincronizacion').innerText = "❌ ¡Tu equipo NO tiene el reloj sincronizado!";
+                        document.getElementById('sincronizacion').classList.add("alerta");
+                        document.getElementById('sincronizacion').classList.remove("sincronizado");
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('sincronizacion').innerText = "⚠️ No se pudo verificar la sincronización.";
+                    document.getElementById('sincronizacion').classList.add("alerta");
+                    console.error('Error al obtener la hora del servidor:', error);
+                });
+        }
+
+        // Actualizar la fecha, hora y sincronización cada 100 milisegundos
+        setInterval(() => {
+            obtenerFecha();
+            mostrarHora();
+            verificarSincronizacion();
+        }, 100);
+    </script>
+</body>
+</html>
