@@ -70,8 +70,8 @@ margin-bottom: 20px;
 }
 
 .image-gallery img {
-width: 150px;
-height: 100px;
+width: 130px;
+height: 60px;
 object-fit: cover;
 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
