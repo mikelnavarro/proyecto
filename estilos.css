@@ -1,15 +1,16 @@
 
 body {
+  overflow-x: hidden;
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
     background-color: #f4f4f9;
   }
 
   header {
     background-color: #4a90e2;
     color: white;
-    padding: 1rem;
+    max-width: 100%;
+    padding: 3rem;
     text-align: center;
   }
 
@@ -23,23 +24,26 @@ body {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 1rem;
     text-decoration: none;
   }
 
   nav a:hover {
     background-color: #575757;
   }
+  div {
+    margin: 20px;
+    overflow: hidden;/* Previene que el contenido se desborde fuera del div */
+  }
 
   .container {
     display: flex;
-    margin: 20px;
   }
 
   .container .section {
     flex: 1;
-    margin: 10px;
-    padding: 20px;
+    margin: 20px;
+    padding: 1rem;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -49,8 +53,7 @@ body {
   }
 
   .results, .complaints {
-    margin: 20px;
-    padding: 20px;
+    padding: 1rem;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -64,18 +67,15 @@ text-align: center;
 }
 
 .image-gallery {
-display: flex;
-justify-content: center;
 gap: 10px;
+justify-content: center;
 margin-bottom: 20px;
 }
 
 .image-gallery img {
-width: 130px;
-height: 60px;
+height: auto;
 object-fit: cover;
 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-max-width:100%;
 }
 
 .audio-player {
