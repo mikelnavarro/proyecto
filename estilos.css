@@ -58,6 +58,20 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
+/* Estilo para imagenes de la galería */
+  .image-gallery img {
+    animation: pulse 6s infinite ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      filter: brightness(100%);
+    }
+    50% {
+      filter: brightness(120%);
+    }
+  }
+  
   .media-section {
 margin: 20px;
 padding: 20px;
