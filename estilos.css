@@ -72,6 +72,15 @@ body {
     }
   }
   
+  .image-gallery img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  
+  .image-gallery img:hover {
+    transform: scale(1.05);
+    filter: brightness(110%);
+  }
+  
   .media-section {
 margin: 20px;
 padding: 20px;
