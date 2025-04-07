@@ -59,10 +59,15 @@ body {
   }
 
 /* Estilo para imagenes de la galería */
-  .image-gallery img {
-    animation: pulse 6s infinite ease-in-out;
-  }
-  
+.image-gallery img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.image-gallery img:hover {
+  transform: scale(1.05);
+  filter: brightness(110%);
+}
+
   @keyframes pulse {
     0%, 100% {
       filter: brightness(100%);
@@ -70,15 +75,6 @@ body {
     50% {
       filter: brightness(120%);
     }
-  }
-  
-  .image-gallery img {
-    transition: transform 0.3s ease, filter 0.3s ease;
-  }
-  
-  .image-gallery img:hover {
-    transform: scale(1.05);
-    filter: brightness(110%);
   }
   
   .media-section {
