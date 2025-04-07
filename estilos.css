@@ -60,6 +60,7 @@ body {
 
 /* Estilo para imagenes de la galería */
 .image-gallery img {
+  animation: wave 4s infinite linear;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
