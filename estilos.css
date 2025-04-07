@@ -299,3 +299,20 @@ background-color: #357abd;
   margin: 10px;
   font-weight: bold;
 }
+#resultados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+#resultados .source {
+  text-align: center;
+  margin-top: 20px;
+}
+#resultados .source a {
+  color: #007BFF;
+  text-decoration: none;
+}
+#resultados .source a:hover {
+  text-decoration: underline;
+}
