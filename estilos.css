@@ -9,9 +9,10 @@ body {
   header {
     background-color: #4a90e2;
     color: white;
-    max-width: 100%;
-    padding: 3rem;
+    padding: 40px;
     text-align: center;
+    background-position: 70%;
+    background-image: url(https://mikelnav.netlify.app/imagenes/img-cuadro.jpg);
   }
 
   nav {
@@ -65,39 +66,33 @@ body {
 }
 
 .image-gallery img:hover {
-  transform: scale(1.05);
+  transform: scale(1.2);
   filter: brightness(110%);
 }
-
-  @keyframes pulse {
+@keyframes pulse {
     0%, 100% {
       filter: brightness(100%);
     }
-    50% {
-      filter: brightness(120%);
-    }
   }
   .media-section {
-margin: 20px;
-padding: 20px;
-background-color: #ffffff;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+margin: auto;
+padding: 16px;
 text-align: center;
+background-color: rgba(0,0,0,0.1);
+box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+object-fit: cover;
 }
 
 .image-gallery {
 gap: 10px;
-justify-content: center;
-box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
-margin-bottom: 20px;
+text-align: center;
+object-fit: cover;
 }
-
 .image-gallery img {
 height: auto;
-object-fit: cover;
 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+width: 10%;
 }
-
 .audio-player {
 margin-top: 10px;
 }
@@ -197,6 +192,7 @@ max-width: 600px;
 margin-left: auto;
 margin-right: auto;
 line-height: 1.8;
+text-align: center;
 }
 
 .iframe-container {
