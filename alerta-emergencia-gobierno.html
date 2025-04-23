@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡ALERTA DE EMERGENCIA!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fef4f4; /* Rojo muy claro */
+            color: #880808;         /* Rojo oscuro */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border: 4px solid #b22222; /* Rojo más intenso */
+            border-radius: 0.75rem; /* Bordes redondeados */
+            padding: 2rem;
+            text-align: center;
+            max-width: 90%;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 6px 8px -3px rgba(0, 0, 0, 0.15), 0 3px 5px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;      /* Muy grande */
+            font-weight: 700;       /* Negrita */
+            color: #b22222;         /* Rojo intenso */
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }  /* Aumenta un poco el tamaño */
+            100% { transform: scale(1); }
+        }
+
+
+        h2 {
+            font-size: 1.875rem;    /* Más grande */
+            font-weight: 700;       /* Negrita */
+            color: #880808;         /* Rojo oscuro */
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 1.125rem;    /* Ligeramente más grande */
+            line-height: 1.75rem;    /* Más espacio entre líneas */
+            color: #444444;         /* Gris muy oscuro */
+            margin-bottom: 2rem;
+        }
+
+        .button {
+            background-color: #b22222;     /* Rojo intenso */
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 700;       /* Negrita */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 1.125rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            background-color: #a51e1e;  /* Rojo un poco más oscuro */
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        #additional-info {
+            background-color: #f8d7da; /* Rosa muy claro */
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 0.375rem;
+            border: 1px solid #f1948b;  /* Rosa más oscuro */
+        }
+
+        #additional-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #a94442;         /* Rojo oscuro */
+            margin-bottom: 1rem;
+        }
+
+        #additional-info ul {
+            list-style-position: inside;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        #additional-info li {
+            font-size: 1.125rem;
+            color: #555555;
+            line-height: 1.75rem;
+        }
+
+        #additional-info strong {
+            font-weight: 600;
+            color: #b22222;      /* Rojo intenso */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡ALERTA DE EMERGENCIA!</h1>
+        <h2>Aviso de Protección Civil del Gobierno de España</h2>
+        <p>
+            El Gobierno de España, a través de Protección Civil, informa de la <strong>inminente escalada de tensiones</strong> en la Unión Europea, que podrían derivar en un conflicto armado.
+        </p>
+        <p>
+            Se ha detectado actividad de denegación de servicio (DDoS) dirigida a equipos conectados a la red de una manera específica (se detallará en próximas comunicaciones).  Este mensaje es un <strong>aviso de emergencia</strong> y es de vital importancia que se sigan las instrucciones que se proporcionarán a continuación.
+        </p>
+        <p>
+            <strong>Instrucciones:</strong>
+        </p>
+        <ol>
+            <li><strong>Mantenga la calma.</strong> No cunda el pánico, pero permanezca alerta a las actualizaciones oficiales.</li>
+            <li><strong>No intente reiniciar su equipo.</strong> Esto podría interferir con las comunicaciones de emergencia.</li>
+            <li><strong>Permanezca atento a los canales oficiales</strong> de comunicación del Gobierno de España y Protección Civil para recibir instrucciones detalladas. Se proporcionará información adicional sobre los pasos a seguir y las zonas de riesgo.</li>
+            <li><strong>Prepare un kit de emergencia</strong> con suministros básicos (agua, alimentos no perecederos, botiquín de primeros auxilios, linterna, radio).</li>
+            <li><strong>Establezca un plan de contacto</strong> con sus familiares y seres queridos.</li>
+        </ol>
+
+        <div class="text-center mt-4">
+            <a href="https://www.proteccioncivil.es/" class="button" target="_blank" rel="noopener noreferrer">Sitio Web de Protección Civil</a>
+        </div>
+
+        <div id="additional-info">
+            <h3>Información Adicional:</h3>
+            <p>
+                Este mensaje se muestra debido a la detección de actividad anómala en su sistema, que coincide con los parámetros de la alerta temprana del Gobierno de España.  La situación es de extrema gravedad y requiere la máxima atención y colaboración ciudadana.
+            </p>
+            <p>
+                <strong>Próximas Comunicaciones:</strong> Se proporcionará información detallada sobre la naturaleza de la amenaza, las áreas afectadas y los protocolos de actuación a través de los canales oficiales.
+            </p>
+            <ul>
+                <li>Sitio web del Ministerio del Interior</li>
+                <li>Cuentas oficiales en redes sociales (Twitter, Facebook) de la Presidencia del Gobierno y Protección Civil.</li>
+                <li>Emisoras de radio y televisión de servicio público.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Cambiado a flex-start para alinear el contenido desde arriba */
+            height: 100vh;
+            margin: 0;
+            font-family: 'Google Sans', sans-serif;
+            background-color: #fff;
+        }
+        .logo-container {
+            margin-top: 20vh; /* Ajustado el margen superior para centrar el logo */
+            margin-bottom: 20px;
+            display: flex; /* Añadido para centrar el logo */
+            justify-content: center;
+        }
+        .logo {
+            /* El logo de Google se inserta como una imagen, no se define en CSS */
+            height: auto; /* Asegura que la altura se ajuste proporcionalmente */
+            max-width: 100%; /* Asegura que el logo no se desborde en pantallas pequeñas */
+        }
+        .search-bar-container {
+            width: 100%;
+            max-width: 584px; /* Ancho máximo de la barra de búsqueda */
+            padding: 10px;
+            display: flex;
+            justify-content: center; /* Centra la barra de búsqueda */
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #dfe1e5;
+            border-radius: 24px;
+            padding: 0 14px;
+            width: 100%; /* La barra de búsqueda ocupa el 100% del contenedor */
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+            height: 44px; /* Altura específica para la barra de búsqueda */
+        }
+        .search-bar:hover, .search-bar:focus-within {
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+            border-color: #b6c1cd;
+        }
+        .search-icon {
+            margin-right: 8px;
+            color: #9aa0a6;
+            height: 20px; /* Tamaño del icono de búsqueda */
+            width: 20px;
+        }
+        .input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #202124;
+        }
+        .voice-search-icon {
+            margin-left: 8px;
+            color: #9aa0a6;
+            height: 24px; /* Tamaño del icono de búsqueda por voz */
+            width: 24px;
+            cursor: pointer; /* Indica que es un elemento interactivo */
+        }
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+        }
+        .google-button {
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 4px;
+            color: #3c4043;
+            font-size: 14px;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-family: 'Google Sans', sans-serif;
+        }
+        .google-button:hover {
+            background-color: #f0f0f1;
+            border-color: #dfe1e5;
+        }
+        .language-links {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #3c4043;
+        }
+        .language-links a {
+            color: #1a0dab;
+            text-decoration: none;
+            margin: 0 3px;
+        }
+        .language-links a:hover {
+            text-decoration: underline;
+        }
+        #cookie-consent {
+            position: fixed; /* Fix the position of the element */
+            bottom: 0; /* Position it at the bottom of the viewport */
+            left: 0;
+            width: 100%;
+            background-color: #f0f4f8; /* A light background color */
+            color: #202124;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Vertically align items, if needed */
+            gap: 20px; /* Space between elements inside the container */
+            font-size: 14px;
+            z-index: 1000; /* Ensure it's above other elements */
+            box-shadow: 0px -2px 5px rgba(0,0,0,0.05); /* Subtle top shadow for better visibility */
+        }
+
+        #cookie-consent button {
+            background-color: #007bff; /* Google blue */
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        #cookie-consent button:hover {
+            background-color: #0056b3; /* Darker shade of blue on hover */
+        }
+
+        #cookie-consent a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        #cookie-consent a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .google-button {
+                width: 100%;
+            }
+            #cookie-consent {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo">
+    </div>
+    <div class="search-bar-container">
+        <div class="search-bar">
+            <img class="search-icon" src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/search.svg" alt="Search Icon">
+            <input type="text" class="input" placeholder="Buscar en Google">
+            <img class="voice-search-icon" src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/mic.svg" alt="Voice Search Icon">
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="google-button">Buscar con Google</button>
+        <button class="google-button">Voy a tener suerte</button>
+    </div>
+    <div class="language-links">
+        Idiomas ofrecidos por Google:
+        <a href="#">Español (Latinoamérica)</a>
+        <a href="#">Kichwa</a>
+        <a href="#">Q\'eqchi\'</a>
+        <a href="#">Hñähñu</a>
+        <a href="#">Más</a>
+    </div>
+    <div id="cookie-consent">
+        <span>Google usa cookies y otros datos para ofrecer, mantener y mejorar sus servicios.</span>
+        <a href="#">Más información</a>
+        <button id="accept-cookies">Aceptar</button>
+    </div>
+    <script>
+        const cookieConsent = document.getElementById('cookie-consent');
+        const acceptCookiesButton = document.getElementById('accept-cookies');
+
+        if (localStorage.getItem('cookieConsent') !== 'accepted') {
+            cookieConsent.style.display = 'flex';
+        } else {
+            cookieConsent.style.display = 'none';
+        }
+
+        acceptCookiesButton.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieConsent.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

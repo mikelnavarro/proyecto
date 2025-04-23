@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS y DHCP Explicados para Alumnos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blue-principal': '#3498db',
+                        'blue-secundario': '#2980b9',
+                        'green-principal': '#2ecc71',
+                        'green-secundario': '#27ae60',
+                        'yellow-principal': '#f39c12',
+                        'yellow-secundario': '#d68910',
+                        'red-principal': '#e74c3c',
+                        'red-secundario': '#c0392b',
+                        'gray-principal': '#95a5a6',
+                        'gray-secundario': '#7f8c8d',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-800">
+    <header class="bg-blue-principal dark:bg-blue-secundario text-white py-4 shadow-md">
+        <div class="container mx-auto px-4">
+            <h1 class="text-2xl font-semibold text-center">DNS y DHCP Explicados para Alumnos</h1>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 py-8">
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">¿Qué es una Red Local (LAN)?</h2>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                Imagina que tienes varios dispositivos en tu casa: tu ordenador, tu móvil, la tablet, la impresora... Si todos están conectados entre sí, formando una pequeña red, ¡eso es una Red Local!
+            </p>
+            <div class="flex justify-center">
+                <img src="https://www.cloudflare.com/img/learning/network/what-is-a-lan/local-area-network.png" alt="Red Local (LAN)" class="rounded-lg shadow-md max-w-full h-auto">
+            </div>
+            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mt-4">
+                <li><strong>Conexión:</strong> Por cable (Ethernet) o inalámbrica (Wi-Fi).</li>
+                <li><strong>Alcance:</strong> Espacio pequeño, como una casa, oficina o colegio.</li>
+                <li><strong>Objetivo:</strong> Compartir archivos, impresoras, y conectar a Internet.</li>
+            </ul>
+        </section>
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">¿Y qué es Internet?</h2>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                Internet es como una "red de redes". ¡Es una red gigante que conecta millones de ordenadores y dispositivos en todo el mundo!
+            </p>
+            <div class="flex justify-center">
+                <img src="https://www.ionos.es/digitalguide/fileadmin/DigitalGuide/Teaser/internet-definition.jpg" alt="Internet" class="rounded-lg shadow-md max-w-full h-auto">
+            </div>
+            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mt-4">
+                <li><strong>Conexión:</strong> A través de diferentes medios (cable, fibra óptica, satélite, etc.).</li>
+                <li><strong>Alcance:</strong> ¡Todo el planeta!</li>
+                <li><strong>Objetivo:</strong> Comunicarnos, buscar información, ver vídeos, jugar, comprar, y mucho más.</li>
+            </ul>
+        </section>
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">¿Qué es el DNS? ¡La Guía Telefónica de Internet!</h2>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                Cuando quieres visitar una página web, escribes su nombre, como "google.com". Pero los ordenadores no entienden de nombres, ¡ellos usan números! (direcciones IP). DNS es el sistema que traduce los nombres que conocemos a los números que entienden los ordenadores.
+            </p>
+            <div class="flex justify-center">
+                <img src="https://www.cloudflare.com/img/learning/dns/what-is-dns/how-dns-works.png" alt="DNS" class="rounded-lg shadow-md max-w-full h-auto">
+            </div>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+                <strong>Ejemplo:</strong>
+            </p>
+            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                <li>Escribes "youtube.com" en tu navegador.</li>
+                <li>Tu ordenador pregunta a un servidor DNS: "¿Cuál es el número de "youtube.com"?"</li>
+                <li>El servidor DNS responde: "Es 142.250.78.174".</li>
+                <li>Tu ordenador se conecta al número 142.250.78.174 y ¡voilà! Ves YouTube.
+            </ul>
+        </section>
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">¿Qué es el DHCP? ¡El Repartidor de Direcciones!</h2>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                Cada dispositivo en una red necesita una dirección IP para poder comunicarse. DHCP es un servidor que reparte estas direcciones automáticamente. ¡Es como el profesor que asigna los asientos en clase para que todos tengan su lugar!
+            </p>
+            <div class="flex justify-center">
+                <img src="https://www.cloudflare.com/img/learning/dhcp/what-is-dhcp/how-dhcp-works.png" alt="DHCP" class="rounded-lg shadow-md max-w-full h-auto">
+            </div>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+                <strong>Ejemplo:</strong>
+            </p>
+            <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                <li>Conectas tu móvil al Wi-Fi de tu casa.</li>
+                <li>Tu móvil pide una dirección IP al servidor DHCP de tu router.</li>
+                <li>El router (que tiene el servidor DHCP) le asigna una dirección IP a tu móvil, por ejemplo, 192.168.1.105.</li>
+                <li>Ahora tu móvil puede conectarse a Internet y a otros dispositivos de la red.
+            </ul>
+        </section>
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">¿Cómo Funcionan Juntos DNS y DHCP?</h2>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                DNS y DHCP trabajan en equipo para que navegar por Internet sea súper fácil. DHCP le da a tu dispositivo una dirección IP para que pueda conectarse a la red, y DNS traduce los nombres de las páginas web a direcciones IP para que puedas visitarlas.
+            </p>
+            <div class="flex justify-center">
+                <img src="https://www.infoblox.com/wp-content/uploads/2021/01/dhcp-and-dns-working-together.png" alt="DNS y DHCP Juntos" class="rounded-lg shadow-md max-w-full h-auto">
+            </div>
+        </section>
+    </main>
+    <footer class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 py-4 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; Explicación de DNS y DHCP para Alumnos - <a href="https://www.mikelnav.netlify.app" class="text-blue-principal hover:underline">mikelnav.netlify.app</a></p>
+        </div>
+    </footer>
+</body>
+</html>
