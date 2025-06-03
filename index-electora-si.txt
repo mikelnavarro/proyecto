@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Sondeo Electoral</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Very light gray */
+            color: #334155; /* Dark slate gray */
+        }
+        .header-bg {
+            background-color: #1e3a8a; /* Deep blue */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem; /* Slightly rounded */
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* Subtle shadow */
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-size: 1.75rem; /* Slightly smaller for simplicity */
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+            border-bottom: 2px solid #3b82f6; /* Blue accent line */
+            padding-bottom: 0.5rem;
+        }
+        .section-intro {
+            color: #64748b; /* Medium gray */
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px; /* More constrained max-width */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Fixed height for simplicity */
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 250px; /* Smaller height on mobile */
+            }
+        }
+        .llm-analysis-output {
+            background-color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #334155;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- No Mermaid JS or SVG graphics used in this output. -->
+
+    <header class="header-bg text-white p-6 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold mb-1">Sondeo Electoral</h1>
+        <p class="text-lg md:text-xl font-light">Análisis de resultados no oficial del 23 de julio de 2023</p>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-4 md:p-6">
+
+        <section class="card text-center">
+            <h2 class="section-title justify-center">Análisis de Resultados con IA ✨</h2>
+            <p class="section-intro max-w-2xl mx-auto">Haz clic en el botón para obtener un análisis conciso de los resultados del sondeo, generado por inteligencia artificial.</p>
+            <button id="generateAnalysisBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out">
+                Generar Análisis ✨
+            </button>
+            <div id="analysisOutput" class="llm-analysis-output hidden">
+                <p id="analysisText"></p>
+                <div id="analysisLoading" class="hidden text-center">
+                    <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900"></div>
+                    <p>Generando análisis...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card text-center">
+            <h2 class="section-title justify-center">Panorama Nacional</h2>
+            <p class="section-intro max-w-2xl mx-auto">Este sondeo, de carácter no oficial, presenta una proyección de los resultados electorales, mostrando las principales fuerzas políticas en España.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="p-4 rounded-md text-white font-semibold flex flex-col items-center justify-center" style="background-color: #0064FF;"> <!-- PP: azul -->
+                    <div class="text-4xl font-bold">43.8%</div>
+                    <div class="text-xl">PP</div>
+                </div>
+                <div class="p-4 rounded-md text-white font-semibold flex flex-col items-center justify-center" style="background-color: #E4002B;"> <!-- PSOE: rojo -->
+                    <div class="text-4xl font-bold">30.9%</div>
+                    <div class="text-xl">PSOE</div>
+                </div>
+                <div class="p-4 rounded-md text-white font-semibold flex flex-col items-center justify-center" style="background-color: #67B72F;"> <!-- VOX: verde -->
+                    <div class="text-4xl font-bold">14.8%</div>
+                    <div class="text-xl">VOX</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="card">
+                <h2 class="section-title">Distribución del Voto</h2>
+                <p class="section-intro">El gráfico de pastel muestra la proporción de votos obtenidos por las principales candidaturas a nivel nacional, incluyendo la división de Emergència Catalunya en JUNTS y ERC.</p>
+                <div class="chart-container">
+                    <canvas id="voteShareChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">Reparto de Escaños</h2>
+                <p class="section-intro">Este gráfico de barras ilustra la asignación de escaños en el Congreso de los Diputados, reflejando cómo los votos se traducen en representación parlamentaria.</p>
+                <div class="chart-container">
+                    <canvas id="seatsDistributionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">Análisis de Bloques Parlamentarios</h2>
+            <p class="section-intro">La formación de bloques es crucial para la gobernabilidad. Este gráfico muestra la distribución de escaños entre los principales bloques políticos, con la mayoría absoluta en 176 escaños.</p>
+            <div class="chart-container h-56">
+                 <canvas id="blocAnalysisChart"></canvas>
+            </div>
+        </section>
+        
+        <section class="card">
+            <h2 class="section-title">Resultados Provinciales Destacados</h2>
+            <p class="section-intro">La siguiente tabla detalla las tres fuerzas más votadas en algunas provincias clave, ofreciendo una visión de las dinámicas políticas a nivel regional.</p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="p-3 font-semibold text-gray-700">Región</th>
+                            <th class="p-3 font-semibold text-gray-700">1ª Fuerza</th>
+                            <th class="p-3 font-semibold text-gray-700">2ª Fuerza</th>
+                            <th class="p-3 font-semibold text-gray-700">3ª Fuerza</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-3">Madrid</td>
+                            <td class="p-3">PP</td>
+                            <td class="p-3">PSOE</td>
+                            <td class="p-3">VOX</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-3">Barcelona</td>
+                            <td class="p-3">PSOE</td>
+                            <td class="p-3">PP</td>
+                            <td class="p-3">ERC</td>
+                        </tr>
+                         <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-3">València/Valencia</td>
+                            <td class="p-3">PP</td>
+                            <td class="p-3">PSOE</td>
+                            <td class="p-3">VOX</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-3">Bizkaia</td>
+                            <td class="p-3">EAJ-PNV</td>
+                            <td class="p-3">PSOE</td>
+                            <td class="p-3">EH Bildu</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-3">Sevilla</td>
+                            <td class="p-3">PP</td>
+                            <td class="p-3">PSOE</td>
+                            <td class="p-3">VOX</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-3">Girona</td>
+                            <td class="p-3">PSOE</td>
+                            <td class="p-3">ERC</td>
+                            <td class="p-3">JUNTS</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-3">Lleida</td>
+                            <td class="p-3">PSOE</td>
+                            <td class="p-3">ERC</td>
+                            <td class="p-3">PP</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-3">Tarragona</td>
+                            <td class="p-3">PSOE</td>
+                            <td class="p-3">PP</td>
+                            <td class="p-3">ERC</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">Votos Sin Representación</h2>
+            <p class="section-intro">Este gráfico destaca las candidaturas que, a pesar de acumular un número significativo de votos, no lograron obtener escaños en el Congreso.</p>
+            <div class="chart-container">
+                 <canvas id="lostVoteChart"></canvas>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-4 bg-gray-100 text-gray-500 text-sm">
+        <p>Sondeo basado en datos no oficiales del 23J.</p>
+        <p>Los datos presentados son especulativos y no garantizan resultados futuros.</p>
+    </footer>
+
+    <script>
+        // Function to wrap long labels for Chart.js
+        const wrapLabel = (label, maxWidth) => {
+            if (typeof label !== 'string' || label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine += (currentLine.length > 0 ? ' ' : '') + word;
+                }
+            }
+            if (currentLine.length > 0) {
+                lines.push(currentLine);
+            }
+            return lines;
+        };
+
+        // Shared tooltip configuration for all Chart.js instances
+        const SHARED_TOOLTIP_CONFIG = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        // Party specific colors
+        const PARTY_COLORS = {
+            'PP': '#0064FF',     // Azul
+            'PSOE': '#E4002B',   // Rojo
+            'VOX': '#67B72F',    // Verde
+            'SUMAR': '#D40078',  // Fucsia
+            'Podemos': '#663399',// Morado
+            'EH Bildu': '#008000',// Verde Vasco (oscuro)
+            'EAJ-PNV': '#00A000',// Verde Vasco (claro)
+            'JUNTS': '#87CEEB',  // Celeste
+            'ERC': '#FFC300',    // Mostaza
+            'U.P.N.': '#FFD700', // Dorado (arbitrary for UPN)
+            'CCa': '#FF8C00',    // Naranja (arbitrary for CCa)
+            'B.N.G.': '#A020F0', // Púrpura (arbitrary for BNG)
+            'Otros': '#cbd5e1'   // Gris claro para otros
+        };
+
+        // Data for charts (adjusted for JUNTS/ERC split and slight variations)
+        // Total votes from the "TOTAL" section for all parties combined: 25295873
+        const totalValidVotes = 25295873;
+
+        // Votes for main parties (from original data)
+        const ppVotes = 11071194;
+        const psoeVotes = 7821718;
+        const voxVotes = 3737859;
+        const sumarVotes = 2102582;
+        const podemosVotes = 618449;
+        const ehBilduVotes = 381702;
+        const eajPnvVotes = 358980;
+
+        // Split Emergència Catalunya votes (861449) into JUNTS and ERC with slight variation
+        const juntsVotes = 450000; // Slightly varied
+        const ercVotes = 411449;   // Slightly varied
+
+        // Calculate sum of votes for the parties explicitly shown in the pie chart
+        const sumExplicitVotes = ppVotes + psoeVotes + voxVotes + sumarVotes + juntsVotes + ercVotes + podemosVotes + ehBilduVotes + eajPnvVotes;
+
+        // Calculate the 'Otros' category by summing all other parties from the TOTAL list
+        // and subtracting the explicit ones, then adding JUNTS/ERC
+        const otherPartiesVotes = totalValidVotes - (ppVotes + psoeVotes + voxVotes + sumarVotes + podemosVotes + ehBilduVotes + eajPnvVotes + (861449 /* Emergència Catalunya original */));
+        const finalOtherVotes = otherPartiesVotes + (861449 - (juntsVotes + ercVotes)); // Adjust for the split
+
+        // Chart 1: Vote Share (Doughnut Chart)
+        const voteShareCtx = document.getElementById('voteShareChart').getContext('2d');
+        new Chart(voteShareCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['PP', 'PSOE', 'VOX', 'SUMAR', 'JUNTS', 'ERC', 'Podemos', 'EH Bildu', 'EAJ-PNV', 'Otros'],
+                datasets: [{
+                    label: 'Porcentaje de Voto',
+                    data: [
+                        (ppVotes / totalValidVotes * 100).toFixed(2),
+                        (psoeVotes / totalValidVotes * 100).toFixed(2),
+                        (voxVotes / totalValidVotes * 100).toFixed(2),
+                        (sumarVotes / totalValidVotes * 100).toFixed(2),
+                        (juntsVotes / totalValidVotes * 100).toFixed(2),
+                        (ercVotes / totalValidVotes * 100).toFixed(2),
+                        (podemosVotes / totalValidVotes * 100).toFixed(2),
+                        (ehBilduVotes / totalValidVotes * 100).toFixed(2),
+                        (eajPnvVotes / totalValidVotes * 100).toFixed(2),
+                        // Calculate 'Otros' dynamically to ensure sum is 100%
+                        (100 - (
+                            (ppVotes / totalValidVotes * 100) +
+                            (psoeVotes / totalValidVotes * 100) +
+                            (voxVotes / totalValidVotes * 100) +
+                            (sumarVotes / totalValidVotes * 100) +
+                            (juntsVotes / totalValidVotes * 100) +
+                            (ercVotes / totalValidVotes * 100) +
+                            (podemosVotes / totalValidVotes * 100) +
+                            (ehBilduVotes / totalValidVotes * 100) +
+                            (eajPnvVotes / totalValidVotes * 100)
+                        )).toFixed(2)
+                    ],
+                    backgroundColor: [
+                        PARTY_COLORS['PP'],
+                        PARTY_COLORS['PSOE'],
+                        PARTY_COLORS['VOX'],
+                        PARTY_COLORS['SUMAR'],
+                        PARTY_COLORS['JUNTS'],
+                        PARTY_COLORS['ERC'],
+                        PARTY_COLORS['Podemos'],
+                        PARTY_COLORS['EH Bildu'],
+                        PARTY_COLORS['EAJ-PNV'],
+                        PARTY_COLORS['Otros']
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...SHARED_TOOLTIP_CONFIG.plugins,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Seats Distribution (Horizontal Bar Chart)
+        const seatsCtx = document.getElementById('seatsDistributionChart').getContext('2d');
+        const seatLabels = ['PP', 'PSOE', 'VOX', 'SUMAR', 'JUNTS', 'ERC', 'EH Bildu', 'EAJ-PNV', 'CCa', 'U.P.N.', 'B.N.G.', 'Podemos'];
+        const seatData = [165, 104, 37, 10, 8, 6, 7, 6, 3, 2, 1, 1]; // JUNTS: 8, ERC: 6
+        const seatColors = seatLabels.map(label => PARTY_COLORS[label] || PARTY_COLORS['Otros']);
+
+        new Chart(seatsCtx, {
+            type: 'bar',
+            data: {
+                labels: seatLabels.map(l => wrapLabel(l, 16)),
+                datasets: [{
+                    label: 'Número de Escaños',
+                    data: seatData,
+                    backgroundColor: seatColors,
+                    borderColor: '#ffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...SHARED_TOOLTIP_CONFIG,
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', // Horizontal bar chart
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Block Analysis (Stacked Horizontal Bar Chart)
+        const blocCtx = document.getElementById('blocAnalysisChart').getContext('2d');
+        new Chart(blocCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Composición del Congreso'],
+                datasets: [
+                    {
+                        label: 'Bloque Derecha (PP, VOX, UPN)',
+                        data: [204],
+                        backgroundColor: PARTY_COLORS['PP'],
+                    },
+                    {
+                        label: 'Bloque Izquierda (PSOE, SUMAR, Podemos)',
+                        data: [115],
+                        backgroundColor: PARTY_COLORS['PSOE'],
+                    },
+                    {
+                        label: 'Otros con Escaños (JUNTS, ERC, EH Bildu, EAJ-PNV, CCa, B.N.G.)',
+                        data: [31],
+                        backgroundColor: PARTY_COLORS['Otros'],
+                    }
+                ]
+            },
+            options: {
+                 ...SHARED_TOOLTIP_CONFIG,
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        stacked: true,
+                        max: 350,
+                        ticks: {
+                           stepSize: 50,
+                           font: {
+                                size: 12
+                           }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                 plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                xMin: 176,
+                                xMax: 176,
+                                borderColor: 'rgb(255, 99, 132)',
+                                borderWidth: 2,
+                                label: {
+                                    content: 'Mayoría Absoluta (176)',
+                                    enabled: true,
+                                    position: 'end',
+                                    font: {
+                                        size: 10
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Lost Votes (Vertical Bar Chart) - Parties with 0 seats
+        const lostVoteCtx = document.getElementById('lostVoteChart').getContext('2d');
+        // Filter for parties with 0 seats from the original data, excluding those now explicitly listed with seats
+        const zeroSeatParties = [
+            { name: 'CUP-PR', votes: 99644 },
+            { name: 'FRENTE OBRERO', votes: 46274 },
+            { name: 'NUEVA CANARIAS - BLOQUE CANARISTA', votes: 45595 },
+            { name: 'PARTIT DEMÒCRATA EUROPEU CATALÀ-ESPAI CIU', votes: 32016 },
+            { name: 'RECORTES CERO', votes: 23421 }
+        ];
+
+        // Sort by votes descending and take top 5
+        zeroSeatParties.sort((a, b) => b.votes - a.votes);
+        const topLostVoteParties = zeroSeatParties.slice(0, 5);
+
+        const lostVoteLabels = topLostVoteParties.map(p => p.name);
+        const lostVoteData = topLostVoteParties.map(p => p.votes);
+        const lostVoteColors = [
+            '#a855f7', // Purple-500
+            '#f97316', // Orange-500
+            '#eab308', // Yellow-500
+            '#22d3ee', // Cyan-400
+            '#ec4899'  // Pink-500
+        ];
+
+        new Chart(lostVoteCtx, {
+            type: 'bar',
+            data: {
+                labels: lostVoteLabels.map(l => wrapLabel(l, 16)),
+                datasets: [{
+                    label: 'Votos sin Escaño',
+                    data: lostVoteData,
+                    backgroundColor: lostVoteColors,
+                }]
+            },
+            options: {
+                ...SHARED_TOOLTIP_CONFIG,
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function(value) {
+                                return value / 1000 + 'k';
+                            },
+                            font: {
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                }
+            }
+        });
+
+        // Gemini API Integration
+        document.getElementById('generateAnalysisBtn').addEventListener('click', async () => {
+            const analysisOutputDiv = document.getElementById('analysisOutput');
+            const analysisTextP = document.getElementById('analysisText');
+            const analysisLoadingDiv = document.getElementById('analysisLoading');
+            
+            analysisOutputDiv.classList.remove('hidden');
+            analysisTextP.classList.add('hidden');
+            analysisLoadingDiv.classList.remove('hidden');
+
+            const prompt = `Analiza los siguientes datos de un sondeo electoral español (basado en las elecciones del 23 de julio de 2023, no oficial). Proporciona un resumen conciso y de alto nivel de los resultados clave a nivel nacional, mencionando los 3 partidos principales (PP, PSOE, VOX) y sus porcentajes de voto y escaños aproximados. También, destaca brevemente cualquier tendencia regional significativa o el desempeño de partidos regionales importantes (como JUNTS, ERC, EH Bildu, EAJ-PNV). Mantén el análisis neutral y objetivo, centrándote en los números proporcionados. Los datos son:
+PP: 43.8% (165 escaños)
+PSOE: 30.9% (104 escaños)
+VOX: 14.8% (37 escaños)
+SUMAR: 8.3% (10 escaños)
+JUNTS: 1.8% (8 escaños)
+ERC: 1.6% (6 escaños)
+EH Bildu: 1.5% (7 escaños)
+EAJ-PNV: 1.4% (6 escaños)
+Podemos: 2.3% (1 escaño)
+Otros partidos con escaños: CCa (3), UPN (2), BNG (1).
+Total de escaños para el Bloque de Derecha (PP, VOX, UPN): 204.
+Total de escaños para el Bloque de Izquierda (PSOE, SUMAR, Podemos): 115.
+Otros partidos con escaños: 31.
+En Barcelona, el PSOE es 1º, el PP 2º, ERC 3º.
+En Bizkaia, EAJ-PNV es 1º, el PSOE 2º, EH Bildu 3º.
+En Girona, el PSOE es 1º, ERC 2º, JUNTS 3º.
+En Lleida, el PSOE es 1º, ERC 2º, el PP 3º.
+En Tarragona, el PSOE es 1º, el PP 2º, ERC 3º.`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    analysisTextP.textContent = text;
+                } else {
+                    analysisTextP.textContent = 'No se pudo generar el análisis. Inténtalo de nuevo más tarde.';
+                }
+            } catch (error) {
+                console.error('Error al llamar a la API de Gemini:', error);
+                analysisTextP.textContent = 'Error al conectar con el servicio de análisis. Por favor, revisa tu conexión.';
+            } finally {
+                analysisLoadingDiv.classList.add('hidden');
+                analysisTextP.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
