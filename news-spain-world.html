@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="_es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding-top: 80px;
+
+        }
+
+        h1 {
+            color: #333;
+            font-size: xx-large;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        h3 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        p.intro::first-letter {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #e67e22;
+            margin-right: 5px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #555555;
+            font-family: 'Times New Roman';
+            justify-content: inter-word;
+            text-align: justify;
+            font-size: 18px;
+            line-height: 1.6;
+            /* Aumenta el espaciado entre líneas para mejor lectura */
+            letter-spacing: 0.5px;
+            /* Sutil espaciado entre letras */
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 15px 0;
+        }
+
+        #opciones-menu a {
+            display: flex;
+            justify-content: space-between;
+            background-color: whitesmoke;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+            margin: 0 15px;
+            display: inline-block;
+            /* Para que funcione el padding */
+            transition: background-color 0.3s ease;
+            /* Transición suave */
+
+
+
+        }
+
+        #opciones-menu a:hover {
+            background-color: blue;
+        }
+
+        #opciones-menu a:visited {
+            text-decoration-color: orange;
+        }
+
+        .box {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .space-right {
+            flex: 1;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            align-items: left;
+            margin-left: 20px;
+        }
+
+        .space-left {
+            flex: 1;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            align-items: left;
+            margin-right: 20px;
+        }
+
+        .blue-box {
+            background-color: powderblue;
+            border-left: 6px solid #00796b;
+            padding: 20px;
+            margin: 20px;
+        }
+        iframe {
+        width: 40%;
+        height: 350px;
+        border: none;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+    }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav id="opciones-menu">
+            <a href="https://www.rtve.es/la-1" target="_blank">La 1 HD</a>
+            <a href="https://www.atresplayer/directos/antena3" target="_blank">Antena 3 HD</a>
+        </nav>
+    </header>
+    <div class="box">
+        <div class="space-left">
+            <h1>Trump arremete contra las Naciones Unidas: "No sirve para nada. Hay que cerrarla".</h1>
+            <h3>El presidente de los Estados Unidos, ha arremetido contra las Naciones Unidas en sus quince minutos del
+                discurso en la cumbre de la ONU</h3>
+            <div class="blue-box">
+                <p>Margaret Their Volvone: «Estamos presenciando el nacimiento del orden mundial autoritario.»</p>
+            </div>
+        </div>
+        <div class="space-right">
+
+        </div>
+    </div>
+    <div class="box">
+        <iframe src="https://www.rtve.es/play/videos/directo/canales-lineales/la-1/" 
+        width="100%" 
+        height="500" 
+        frameborder="0"
+        allowfullscreen></iframe>
+        <iframe
+        src="https://www.rtve.es/play/videos/directo/canales-lineales/play-sansebastianfes/"
+        width="100%"
+        height="500"
+        frameborder="0"
+        allowfullscreen></iframe>
+        <iframe 
+        src="https://www.atresplayer.com/directos/antena3" 
+        width="100%" 
+        height="500" 
+        frameborder="0"
+        allowfullscreen></iframe>
+        <iframe 
+        src="https://www.cuatro.com/en-directo/" 
+        width="100%" 
+        height="500" 
+        frameborder="0"
+        allowfullscreen></iframe>
+        <iframe 
+        src="https://www.telecinco.es/endirecto/#utm_source=directo_desktop" 
+        width="100%" 
+        height="500" 
+        frameborder="0"
+        allowfullscreen></iframe>
+
+    </div>
+    <div id="directos">
+
+    </div>
+</body>
+
+</html>
